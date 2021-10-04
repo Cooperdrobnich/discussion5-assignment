@@ -4,7 +4,7 @@ import unittest
 def count_a(sentence):
 	total = 0
 	for i in range(len(sentence)):
-		if sentence[i] == 'a':
+		if sentence[i] == 'a' or sentence[i] == "A'":
 			total += 1
 	return total
 
@@ -29,6 +29,7 @@ class Warehouse:
 	# Constructor
 	def __init__(self, items = []):
 		self.items = items[:]
+		
 
 	# Prints all the items in the warehouse, one on each line.	
 	def print_items(self):
@@ -38,15 +39,33 @@ class Warehouse:
 
 	# Adds an item to the warehouse	
 	def add_item(self, item):
-		pass
+		self.items.append(item)
+		
+		
+		
+	
 
 	# Returns the item in the warehouse with the lowest stock		
 	def get_min_stock(self):
-		pass
+		min_stock = ""
+		for items in self.items:
+			for item in items.split(","):
+				stock = item[2]
+				
+
+
+		return min_stock
+
+
 	
 	# Returns the item in the warehouse with the highest price
-	def get_max_price(self):
-		pass	
+	def get_max_price(self, items, price):
+		max_price = 0
+		for item in self.items:
+			if price in item > max_price:
+				max_price = price
+		return max_price
+		
 
 
 
@@ -65,21 +84,24 @@ class TestAllMethods(unittest.TestCase):
 	def test_count_a(self):
 		self.assertEqual(count_a("aaa"), 3)
 		self.assertEqual(count_a("He is going to the store"), 0)
-		pass
+		
 
 
 	## Check to see whether you can add an item to the warehouse
 	def test_add_item(self):
-		pass
+		item_list1 = Warehouse()
+		self.assertEqual(item_list1.add_item(str(self.item1)), ['Item = Beer, Price = 6, Stock = 20'])
 
 
 	## Check to see whether warehouse correctly returns the item with the lowest stock
 	def test_warehouse_min_stocks(self):
+		item_list = Warehouse(items = [self.item1, self.item2, self.item3, self.item4])
+		self.assertEqual(item_list.get_min_stock(), 20)
 		pass
-
 
 	# Check to see whether the warehouse correctly return the item with the highest price
 	def test_warehouse_max_price(self):
+		
 		pass
 		
 
